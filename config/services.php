@@ -31,9 +31,9 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('406186370078501'),
-        'client_secret' => env('f195f7f912bf25211fe33d5658d36aca'),
-        'redirect' => env('http://techviews.local/')
+        'client_id' => env('FACEBOOK_KEY'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT_URI')
     ],
 
 ];
