@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => env('406186370078501'),
+        'client_secret' => env('f195f7f912bf25211fe33d5658d36aca'),
+        'redirect' => env('http://techviews.local/')
+    ],
+
 ];
