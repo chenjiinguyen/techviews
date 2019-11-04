@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Socialite;
-use App\User;
 use Auth;
 
 class AuthController extends Controller
@@ -25,21 +24,35 @@ class AuthController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        // Get github's user infomation
-        $user = Socialite::driver($provider)->stateless()->user();
-//        dd($user);
+        $service = Socialite::driver($provider);
+
+        try {
+            $user = $service->stateless()->user();
+        }
+        catch(\Exception $e) {
+            if($redirect = request()->input('redirect')) {
+                session(['callback_redirect_uri' => urlencode($redirect)]);
+            }
+
+            return $service->redirect();
+        }
+
         // Tạo user với các thông tin lấy được từ Facebook
-        $createdUser = User::updateOrCreate([
-            'provider_id' => $user->getId(),
-            ], [
-            'provider' => $provider,
-            'name' => $user->getName(),
-            'email' => $user->getEmail(),
-            'avatar' => $user->avatar_original,
-        ]);
+        $createdUser = \App\User::updateOrCreate(
+            [
+                'provider_id' => $user->getId(),
+            ], 
+            [
+                'provider' => $provider,
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'avatar' => $user->avatar_original,
+            ]
+        );
+
         // Login với user vừa tạo.
         Auth::login($createdUser);
-
+        
         return redirect('/');
     }
 }
