@@ -42,5 +42,9 @@
         
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+
+        <!-- Facebook -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=505957909860537&autoLogAppEvents=1"></script>
     </body>
 </html>

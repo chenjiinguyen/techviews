@@ -2,7 +2,7 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="{{ URL::to('/') }}">{{ __('Tech Views Data') }}</a>
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item mr-3">
@@ -31,27 +31,15 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    <a href="#" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
-                        <span>{{ __('My profile') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-settings-gear-65"></i>
-                        <span>{{ __('Settings') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-calendar-grid-58"></i>
-                        <span>{{ __('Activity') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-support-16"></i>
-                        <span>{{ __('Support') }}</span>
+                        <span>{{ __('Bài Viết Của Bạn') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <i class="ni ni-user-run"></i>
-                        <span>{{ __('Logout') }}</span>
+                        <span>{{ __('Đăng Xuất') }}</span>
                     </a>
                 </div>
             </li>

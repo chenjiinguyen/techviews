@@ -23,27 +23,15 @@
                     <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    <a href="#" class="dropdown-item">
                         <i class="ni ni-single-02"></i>
-                        <span>{{ __('My profile') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-settings-gear-65"></i>
-                        <span>{{ __('Settings') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-calendar-grid-58"></i>
-                        <span>{{ __('Activity') }}</span>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="ni ni-support-16"></i>
-                        <span>{{ __('Support') }}</span>
+                        <span>{{ __('Bài Viết Của Bạn') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         <i class="ni ni-user-run"></i>
-                        <span>{{ __('Logout') }}</span>
+                        <span>{{ __('Đăng Xuất') }}</span>
                     </a>
                 </div>
             </li>
@@ -75,7 +63,8 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="fa fa-bolt text-blue"></i> {{ __('Bài viết mới') }}
+                        <i class="fa fa-search text-blue"></i> {{ __('Tìm kiếm') }}
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
@@ -85,7 +74,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <i class="fa fa-search text-blue"></i> {{ __('Tìm kiếm') }}
                         <i class="fa fa-chart-bar text-primary"></i> {{ __('Xem rank top 50') }}
                     </a>
                 </li>
@@ -112,7 +100,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-blue" href="{{ route('user.index') }}">
+                                <a class="nav-link text-blue" href="#">
                                     <span class="nav-link-text">
                                         <i class="fas fa-hashtag"></i> 
                                         {{ __('techviews_relax') }}

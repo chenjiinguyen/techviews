@@ -15,7 +15,8 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('verify.id');
+
 Auth::routes();
 
 Route::get('verify', 'VerifyController@index');

@@ -3,13 +3,13 @@
 @section('content')
     @include('layouts.headers.guest')
 
-    <div class="container mt--10 pb-5">
+    <div class="container mt--8 pb-5">
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-7">
+            <div class="col-lg-6 col-md-6">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <legend>Xác nhận tài khoản dành cho thành viên trong nhóm</legend>
-                        <form href="{{ __("/verify") }}" method="post">
+                        <form href="{{ __('/verify') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="code">Mã xác nhận của bạn</label>
@@ -31,26 +31,41 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button type="submit" class="btn btn-success" id="submitBtn"><span class="fas fa-ok" aria-hidden="true"></span> Kích hoạt</button>
+                                <div class="col-12">
+                                   <button type="submit" class="btn btn-success" id="submitBtn"><span class="fas fa-ok" aria-hidden="true"></span> Kích hoạt</button>
+                                </div>
                             </div>
                         </form>
-
+                        <div class="mt-3">
+                            <div class="lead">Hướng dẫn</div>
+                            <ol>
+                                <li>Comment ID vào Bài Viết</li>
+                                <li>Click chuột phải vào thời gian bình luận phía dưới và chọn Sao chép liên kết</li>
+                                <li>Dán liên kết vào khung</li>
+                                <li>Nhấn Kích hoạt để xác minh bạn là thành viên của Group</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-7">
+            <div class="col-lg-6 col-md-6">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
                             <legend>{{ __('Xác Minh Tài Khoản') }}</legend>
                         </div>
                         <div>
-                            <div class="fb-comments" data-href="https://techviews.xyz/verify" data-width="100$" data-numposts="5"></div>
-                            <div id="fb-root"></div>
-                            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=505957909860537&autoLogAppEvents=1"></script>
+                            <div style="width: 100%px; height: 485px; overflow-y: scroll;">
+                                <div class="fb-comments" data-href="https://techviews.xyz/verify" data-width="100%" data-numposts="5"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+               <div class="text-center"><img class="img-thumbnail" src="https://i.imgur.com/LGRgfbx.gif" /></div>
             </div>
         </div>
     </div>

@@ -41,67 +41,8 @@ class AuthController extends Controller
         $createdUser = \App\User::updateOrCreate(
             [
                 'provider_id' => $user->getId(),
-            ], 
+            ],
             [
-                'provider' => $provider,
-                'name' => $user->getName(),
-                'email' => $user->getEmail(),
-                'avatar' => $user->avatar_original,
-            ]
-        );
-
-        // Login với user vừa tạo.
-        Auth::login($createdUser);
-
-        $service = Socialite::driver($provider);
-
-        try {
-            $user = $service->stateless()->user();
-        }
-        catch(\Exception $e) {
-            if($redirect = request()->input('redirect')) {
-                session(['callback_redirect_uri' => urlencode($redirect)]);
-            }
-
-            return $service->redirect();
-        }
-
-        // Tạo user với các thông tin lấy được từ Facebook
-        $createdUser = \App\User::updateOrCreate(
-            [
-                'provider_id' => $user->getId(),
-            ], 
-            [
-                'provider' => $provider,
-                'name' => $user->getName(),
-                'email' => $user->getEmail(),
-                'avatar' => $user->avatar_original,
-            ]
-        );
-
-        // Login với user vừa tạo.
-        Auth::login($createdUser);
-
-        $service = Socialite::driver($provider);
-
-        try {
-            $user = $service->stateless()->user();
-        }
-        catch(\Exception $e) {
-            if($redirect = request()->input('redirect')) {
-                session(['callback_redirect_uri' => urlencode($redirect)]);
-            }
-
-            return $service->redirect();
-        }
-
-        // Tạo user với các thông tin lấy được từ Facebook
-        $createdUser = \App\User::updateOrCreate(
-            [
-                'provider_id' => $user->getId(),
-            ], 
-            [
-                'provider' => $provider,
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
                 'avatar' => $user->avatar_original,
