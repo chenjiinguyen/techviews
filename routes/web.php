@@ -11,15 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Auth::routes();
 
-Route::get('login/{provider}', 'AuthController@redirectToProvider');
+Route::get('login/{provider}', 'AuthController@redirectToProvider')->name('login');
 Route::get('{provider}/callback', 'AuthController@handleProviderCallback');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
