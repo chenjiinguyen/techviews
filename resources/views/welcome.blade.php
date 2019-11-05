@@ -5,13 +5,6 @@
         <div class="container">
             <div class="header-body text-center mt-7 mb-7">
                 <div class="row justify-content-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <div class="col-lg-6 col-md-6">
-                        <h1 class="text-white">{{ __('Chào Mừng Bạn Đến Tech Views Data') }}</h1>
-=======
-=======
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
                     <div class="col-lg-7 col-md-8">
                         <h1 class="text-white display-3">{{ __('Chào mừng đến với Techviews') }}</h1>
                         <p class="text-white">Nhìn gì nữa! Ngại gì mà không nhấn đi....Không có mất nick đâu!</p>
@@ -29,10 +22,6 @@
                                 <span class="btn-inner--text">Group trên FB</span>
                             </a>
                         </div>
-<<<<<<< HEAD
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
-=======
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
                     </div>
                 </div>
             </div>

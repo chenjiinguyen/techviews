@@ -5,16 +5,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
             <img src="{{ asset('argon') }}/img/brand/red.png" class="navbar-brand-img" alt="...">
-=======
-=======
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
-        <a class="navbar-brand pt-0" href="#">
-            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -76,69 +69,32 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <a class="nav-link" href="{{ route('home') }}">
-                        <i class="ni ni-tv-2 text-primary"></i> {{ __('Trang Chủ') }}
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-home text-primary"></i> {{ __('Trang chủ') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-bolt text-blue"></i> {{ __('Bài viết mới') }}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+
+                        <i class="fa fa-bolt text-blue"></i> {{ __('Bài viết mới') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-search text-blue"></i> {{ __('Tìm kiếm') }}
+                        <i class="fa fa-chart-bar text-primary"></i> {{ __('Xem rank top 50') }}
                     </a>
                 </li>
 
-            </ul>
-            <!-- Divider -->
-            <hr class="my-3">
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-=======
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-home text-primary"></i> {{ __('Trang chủ') }}
-=======
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-home text-primary"></i> {{ __('Trang chủ') }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-bolt text-blue"></i> {{ __('Bài viết mới') }}
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-<<<<<<< HEAD
-                        <i class="fa fa-bolt text-blue"></i> {{ __('Bài viết mới') }}
-=======
-                        <i class="fa fa-search text-blue"></i> {{ __('Tìm kiếm') }}
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-<<<<<<< HEAD
-                        <i class="fa fa-search text-blue"></i> {{ __('Tìm kiếm') }}
-=======
-                        <i class="fa fa-chart-bar text-primary"></i> {{ __('Xem rank top 50') }}
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-<<<<<<< HEAD
-                        <i class="fa fa-chart-bar text-primary"></i> {{ __('Xem rank top 50') }}
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="fa fa-lock text-primary"></i> {{ __('Khoá link') }}
                     </a>
                 </li>
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
-=======
-                        <i class="fa fa-lock text-primary"></i> {{ __('Khoá link') }}
-                    </a>
-                </li>
->>>>>>> 13adcff1f32da76d7d02b19b28b63d2466ab407f
                 <li class="nav-item">
                     <a class="nav-link active" href="#hashtag" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="hashtag">
                         <i class="fas fa-hashtag text-blue"></i>
