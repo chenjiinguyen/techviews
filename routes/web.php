@@ -11,17 +11,28 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Auth::routes();
+// use Illuminate\Routing\Route;
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+Route::get('verify', 'VerifyController@index');
+Route::post('verify', 'VerifyController@verify');
+
+Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
+
+Route::get('login/{provider}', 'AuthController@redirectToProvider')->name('login');
+Route::get('{provider}/callback', 'AuthController@handleProviderCallback');
+
+Route::middleware('auth', 'verify.id')->group(function() {
+	Route::resource('user', 'UserController')->except('show');
+
+	Route::prefix('profile', function() {
+		Route::get('', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+		Route::put('', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+		Route::put('password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	});
+
+	Route::resource('post', 'PostController');
 });
+
 

@@ -7,16 +7,10 @@
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Argon Dashboard') }}</title>
-        <!-- Favicon -->
+        <title>{{ config('app.name', 'Tech Views Data') }}</title>
         <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
-        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-        <!-- Icons -->
-        <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
-        <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-        <!-- Argon CSS -->
-        <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+        <link type="text/css" href="{{ asset('css/app.css') }}?v=1.0.0" rel="stylesheet">
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -42,5 +36,9 @@
         
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+
+        <!-- Facebook -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=505957909860537&autoLogAppEvents=1"></script>
     </body>
 </html>
