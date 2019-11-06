@@ -32,13 +32,13 @@
                         <h6 class="text-overflow m-0">{{ __('Welcome!') }}</h6>
                     </div>
                     <a href="#" class="dropdown-item">
-                        <i class="ni ni-single-02"></i>
+                        <i class="fa fa-user"></i>
                         <span>{{ __('Bài Viết Của Bạn') }}</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run"></i>
+                        <i class="fas fa-sign-out-alt"></i>
                         <span>{{ __('Đăng Xuất') }}</span>
                     </a>
                 </div>

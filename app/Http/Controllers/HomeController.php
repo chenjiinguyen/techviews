@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('verify.id');
     }
 
     /**
@@ -26,6 +26,7 @@ class HomeController extends Controller
         if(! Auth::check() ) {
             return view('welcome');
         }
+
         return view('dashboard');
     }
 }

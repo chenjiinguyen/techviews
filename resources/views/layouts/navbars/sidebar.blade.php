@@ -136,7 +136,7 @@
                 <li class="nav-item nav-logout">
                     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        <i class="ni ni-user-run text-primary"></i> {{ __('Đăng xuất') }}
+                        <i class="fas fa-sign-out-alt text-primary"></i> {{ __('Đăng xuất') }}
                     </a>
                 </li>
             </ul>
