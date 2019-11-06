@@ -56,7 +56,7 @@
                         </div>
                         <div>
                             <div style="width: 100%px; height: 485px; overflow-y: scroll;">
-                                <div class="fb-comments" data-href="https://techviews.xyz/verify" data-width="100%" data-numposts="5"></div>
+                                <div class="fb-comments" data-href="{{ env('APP_URL') }}verify" data-width="100%" data-numposts="5"></div>
                             </div>
                         </div>
                     </div>
