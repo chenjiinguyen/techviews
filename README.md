@@ -10,6 +10,11 @@
 
 **Laravel Framework 6.4.1**
 
+# What is this ?
+
+TechViews Data helps hide the information of Facebook team members posted on this site. Only members of that Facebook group can unlock and view hidden information on it. Help fight against outside members stealing information inside the group.
+
+
 # Install
 How to Install
 ```
