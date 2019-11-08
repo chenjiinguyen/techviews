@@ -12,9 +12,9 @@
                         <form href="{{ __('/verify') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="code">Mã xác nhận của bạn</label>
+                                <label>Mã xác nhận của bạn</label>
                                 <div class="input-group mb-4">
-                                    <input type="text" class="form-control" id="code" onclick="select()" name="code" value="{{ auth()->user()->provider_id }}" readonly="">
+                                    <input type="text" class="form-control" name="code" value="{{ auth()->user()->provider_id }}" readonly="">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                                     </div>
@@ -56,7 +56,7 @@
                         </div>
                         <div>
                             <div style="width: 100%px; height: 485px; overflow-y: scroll;">
-                                <div class="fb-comments" data-href="{{ env('APP_URL') }}verify" data-width="100%" data-numposts="5"></div>
+                                <div class="fb-comments" data-href="{{ route('verify') }}" data-width="100%" data-numposts="5"></div>
                             </div>
                         </div>
                     </div>

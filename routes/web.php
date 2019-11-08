@@ -15,8 +15,8 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('verify', 'VerifyController@index');
-Route::post('verify', 'VerifyController@verify');
+Route::get('verify', 'VerifyController@index')->name('verify');
+Route::post('verify', 'VerifyController@verify')->name('verify');
 
 Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
