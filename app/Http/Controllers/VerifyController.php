@@ -26,7 +26,9 @@ class VerifyController extends Controller
      */
     public function index()
     {
-        return view('Auth.verify');
+        return view('auth.verify')->with([
+            'pageTitle' => 'Xác Thực Tài Khoản',
+        ]);
     }
 
     /**
@@ -50,7 +52,7 @@ class VerifyController extends Controller
             if ($res->getStatusCode() == '200') {
                 $result = json_decode($res->getBody(), true);
                 if (auth()->user()->provider_id === $result['message']) {
-                    User::where('provider_id', $result['message'])->update(['real_id' => $result['from']['id']]);
+                    User::where('provider_id', $result['message'])->update(['real_id' => $result['from']['id'], 'avatar' => "https://graph.facebook.com/".$result["from"]["id"]."/picture?width=1920" ]);
                     return redirect(route('home'));
                 }
             }

@@ -44,7 +44,6 @@ class AuthController extends Controller
             ],
             [
                 'name' => $user->getName(),
-                'email' => $user->getEmail(),
                 'avatar' => $user->avatar_original,
             ]
         );
@@ -52,7 +51,7 @@ class AuthController extends Controller
         // Login với user vừa tạo.
         Auth::login($createdUser);
 
-        
+
         return redirect('/');
     }
 }

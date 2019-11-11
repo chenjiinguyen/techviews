@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Auth;
 
-class CreateUsersTable extends Migration
+class CreateActioninPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,8 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('actionin_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('real_id')->nullable();
-            $table->string('provider_id')->nullable();
-            $table->string('name');
-            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('actionin_posts');
     }
 }
