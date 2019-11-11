@@ -1,5 +1,5 @@
 @extends('layouts.app', ['class' => 'bg-default'])
-
+@section('pageTitle', $pageTitle)
 @section('content')
     @include('layouts.headers.guest')
 

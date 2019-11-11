@@ -19,14 +19,14 @@ class CreatePostsTable extends Migration
             $table->string('id_author')->nullable();
             $table->string('id_post')->nullable();
             $table->dateTime('create_time')->nullable();
-            $table->dateTime('update_time')->nullable();            
-            $table->boolean('in_group')->nullable();           
-            $table->boolean('reation')->nullable();       
-            $table->boolean('comment')->nullable();         
-            $table->string('password')->nullable();             
-            $table->text('text')->nullable();        
-            $table->bigInteger('views')->default(0);             
-            $table->bigInteger('unlock')->default(0);      
+            $table->dateTime('update_time')->nullable();
+            $table->boolean('in_group')->nullable();
+            $table->boolean('reaction')->nullable();
+            $table->boolean('comment')->nullable();
+            $table->string('password')->nullable();
+            $table->text('text')->nullable();
+            $table->bigInteger('views')->default(0);
+            $table->bigInteger('unlock')->default(0);
             $table->primary('hash');
         });
     }
