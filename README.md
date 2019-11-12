@@ -25,5 +25,6 @@ $ cp .env.example .env
 $ php artisan key:generate
 $ # edit config website in file .env
 $ php artisan migrate --seed
+$ php artisan vendor:publish --tag=laravel-admin-simditor
 $ php artisan erve --port=your-port
 ```
