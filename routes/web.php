@@ -32,7 +32,9 @@ Route::middleware('auth', 'verify.id')->group(function() {
 		Route::put('password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 	});
 
+    Route::get('post/new', 'Post\CreatePostController@index')->name('create.post');
 	Route::get('post/{hash}', 'PostController@index');
+
 });
 
 

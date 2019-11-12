@@ -11,6 +11,7 @@
         <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <link type="text/css" href="{{ asset('css/app.css') }}?v=1.0.0" rel="stylesheet">
+        @stack("head")
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
