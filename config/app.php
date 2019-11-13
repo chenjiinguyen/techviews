@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'token_facebook' => env('TOKEN_FACEBOOK', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

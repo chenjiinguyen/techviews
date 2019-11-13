@@ -43,8 +43,9 @@ class VerifyController extends Controller
             $url = $request->input("url");
             $idpostverymember = explode("?fb_comment_id=", $url);
             $client = new Client();
+
             try {
-                $res = $client->get('https://graph.facebook.com/' . $idpostverymember[1] . "?access_token=" . env("TOKEN_FACEBOOK"));
+                $res = $client->get('https://graph.facebook.com/' . $idpostverymember[1] . "?access_token=" . config("app.token_facebook"));
             }
             catch (GuzzleHttp\Exception\RequestException $e) {
                 return redirect(route('verify'));
