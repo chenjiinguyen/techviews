@@ -29,7 +29,8 @@ var editor = new Simditor({
     </div>
 
     <div class="container-fluid mt--7">
-        <form action="post">
+        <form action="{{ route('create.post') }}" method="POST" >
+            {{ csrf_field() }}
             <div class="row">
                 <div class="col-xl-9">
                     <div class="card bg-secondary shadow">
@@ -41,7 +42,7 @@ var editor = new Simditor({
                             </div>
                         </div>
                         <div class="card-body">
-                            <textarea id="editor" autofocus></textarea>
+                            <textarea id="editor" name="text" autofocus></textarea>
                         </div>
                     </div>
                 </div>
@@ -56,15 +57,15 @@ var editor = new Simditor({
                 </div>
                 <div class="card-body pt-0 pt-md-4">
                     <div class="custom-control custom-checkbox mb-3">
-                            <input class="custom-control-input" id="ingroup" type="checkbox" >
+                            <input class="custom-control-input" id="ingroup" name="ingroup" type="checkbox" >
                             <label class="custom-control-label" for="ingroup">Khóa Thành Viên</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
-                            <input class="custom-control-input" id="reaction" type="checkbox" >
-                            <label class="custom-control-label" for="reaction">Khóa Tương Tác</label>
+                            <input class="custom-control-input" id="reaction" name="reaction" type="checkbox" >
+                            <label class="custom-control-label"  for="reaction">Khóa Tương Tác</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-3">
-                            <input class="custom-control-input" id="comment" type="checkbox" >
+                            <input class="custom-control-input" id="comment" name="comment" type="checkbox" >
                             <label class="custom-control-label" for="comment">Khóa Bình Luận</label>
                     </div>
                     <div class="form-group">

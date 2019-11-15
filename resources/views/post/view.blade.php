@@ -54,8 +54,8 @@
                 </div>
             </div>
             <div class="card-body pt-0 pt-md-4">
-                <div class="mb-3"><i class="fas fa-clock"></i> Tạo lúc {{ date("d/m/Y H:i:s",strtotime($dataProtect->create_time)) }}</div>
-                <div class="mb-3"><i class="fas fa-clock"></i> Cập nhật lúc {{ date("d/m/Y H:i:s",strtotime($dataProtect->update_time)) }}</div>
+                <div class="mb-3"><i class="fas fa-clock"></i> Tạo lúc {{ date("d/m/Y H:i:s",strtotime($dataProtect->created_at)) }}</div>
+                @if (!(empty($dataProtect->updated_at) || $dataProtect->created_at == $dataProtect->updated_at))<div class="mb-3"><i class="fas fa-clock"></i> Cập nhật lúc {{ date("d/m/Y H:i:s",strtotime($dataProtect->updated_at)) }}</div> @endif
                 @if (!empty($dataProtect->in_group))
                 <div class="custom-control custom-checkbox mb-3">
                         <input class="custom-control-input" id="ingroup" type="checkbox" disabled @if($action["member"]) checked @endif>

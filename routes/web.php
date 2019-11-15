@@ -33,6 +33,7 @@ Route::middleware('auth', 'verify.id')->group(function() {
 	});
 
     Route::get('post/new', 'Post\CreatePostController@index')->name('create.post');
+    Route::post('post/new', 'Post\CreatePostController@create');
 	Route::get('post/{hash}', 'PostController@index');
 
 });

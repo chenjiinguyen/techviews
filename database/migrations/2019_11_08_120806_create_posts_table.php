@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title')->nullable();
             $table->string('id_author')->nullable();
             $table->string('id_post')->nullable();
-            $table->dateTime('create_time')->nullable();
-            $table->dateTime('update_time')->nullable();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
             $table->boolean('in_group')->nullable();
             $table->boolean('reaction')->nullable();
             $table->boolean('comment')->nullable();

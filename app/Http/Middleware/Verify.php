@@ -21,6 +21,7 @@ class Verify
             if ($user->real_id == NULL) {
                 return redirect('verify');
             }
+
             return $next($request);
         }
         return $next($request);

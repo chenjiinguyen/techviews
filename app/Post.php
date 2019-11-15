@@ -14,7 +14,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'hash', 'title', 'id_author', 'create_time','update_time', 'in_group','reaction','comment','password', 'text',
+        'hash', 'title', 'id_author','in_group','reaction','comment','password', 'text',
     ];
 
     /**
