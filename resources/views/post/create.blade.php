@@ -3,18 +3,14 @@
 @section('pageTitle', $pageTitle)
 
 @push("head")
-<link rel="stylesheet" type="text/css" href="{{ asset('vendor/laravel-admin-ext/simditor/simditor-2.3.25/styles/simditor.css') }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 @endpush
 
 @push("js")
-<script type="text/javascript" src="{{ asset('vendor/laravel-admin-ext/simditor/simditor-2.3.25/scripts/dompurify.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/laravel-admin-ext/simditor/simditor-2.3.25/scripts/module.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/laravel-admin-ext/simditor/simditor-2.3.25/scripts/hotkeys.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/laravel-admin-ext/simditor/simditor-2.3.25/scripts/uploader.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/laravel-admin-ext/simditor/simditor-2.3.25/scripts/simditor.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <script>
-var editor = new Simditor({
+var editor = new SimpleMDE({
     textarea: $('#editor')
     //optional options
   });
@@ -56,6 +52,11 @@ var editor = new Simditor({
                     </div>
                 </div>
                 <div class="card-body pt-0 pt-md-4">
+                    <div class="form-group">
+                            <label class="form-group" for="title">Tiêu Đề</label>
+                            <input type="text" name="title" placeholder="Tiêu Đề..."  class="form-control" >
+                    </div>
+                    <div class="border-top my-3"></div>
                     <div class="custom-control custom-checkbox mb-3">
                             <input class="custom-control-input" id="ingroup" name="ingroup" type="checkbox" >
                             <label class="custom-control-label" for="ingroup">Khóa Thành Viên</label>
@@ -69,7 +70,7 @@ var editor = new Simditor({
                             <label class="custom-control-label" for="comment">Khóa Bình Luận</label>
                     </div>
                     <div class="form-group">
-                            <input type="text" placeholder="Nhập mật khẩu..."  class="form-control" >
+                            <input type="text" name="password" placeholder="Nhập mật khẩu..."  class="form-control" >
                     </div>
                     <button class="btn btn-icon btn-block btn-danger">
                         <span class="btn-inner--icon"><i class="fas fa-plus-square"></i></span>

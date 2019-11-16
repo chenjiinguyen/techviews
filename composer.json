@@ -10,8 +10,8 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "graham-campbell/markdown": "^11.1",
         "guzzlehttp/guzzle": "~6.0",
-        "jxlwqq/simditor": "^1.0",
         "laravel-frontend-presets/argon": "^1.0",
         "laravel/framework": "^6.2",
         "laravel/socialite": "^4.2",

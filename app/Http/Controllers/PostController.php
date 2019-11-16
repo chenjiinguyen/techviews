@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use App\Post;
 use App\User;
 use Auth;
+use GrahamCampbell\Markdown\Facades\Markdown;
 
 class PostController extends Controller
 {
@@ -96,7 +97,7 @@ class PostController extends Controller
 
 
             if(array_sum($in_post) == array_sum($in_user))
-                $data->data->text = $text;
+                $data->data->text = Markdown::convertToHtml($text);
 
         }
         else $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Bài Viết Chưa Được Đăng</div>';

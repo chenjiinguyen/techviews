@@ -19,7 +19,8 @@ class CreatePostController extends Controller
     public function create(Request $request)
     {
         $text = $request->input("text");
-        if(!empty($text))
+        $title = $request->input("title");
+        if(!empty($text) && !empty($title))
         {
             $in_group = $request->input("ingroup");
             $reaction = $request->input("reaction");
@@ -30,16 +31,17 @@ class CreatePostController extends Controller
             $post =  Post::firstOrCreate(
                     [    "hash" => $hash ],
                     [
-                        "title" => "Text",
+                        "title" => $title,
                         "id_author" => Auth::user()->real_id,
                         "in_group" => ($in_group == "on")?true:false,
                         "reaction" => ($reaction == "on")?true:false,
                         "comment" => ($comment == "on")?true:false,
                         "text" => $text,
+                        "password" => $request->input("password"),
                     ]
                 );
             return redirect("/post/".$hash);
         }
-        return route('create.post');
+        return redirect( route('create.post'));
     }
 }

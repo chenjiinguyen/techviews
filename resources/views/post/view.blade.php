@@ -40,7 +40,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>{!! $dataProtect->text !!}</p>
+                        <p>
+                        {!! $dataProtect->text !!}
+                        </p>
                     </div>
                 </div>
             </div>
