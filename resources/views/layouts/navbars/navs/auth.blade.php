@@ -6,13 +6,13 @@
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item mr-3">
-                <a href="{{ route('login', 'facebook') }}" class="btn btn-white btn-sm btn-icon">
+                <a href="{{ route('create.post') }}" class="btn btn-white btn-sm btn-icon">
                     <span class="btn-inner--icon">
                         <span class="btn-inner--icon">
                             <i class="fas fa-plus"></i>
                         </span>
                     </span>
-                    <span class="btn-inner--text">Đăng bài</span>
+                    <span class="btn-inner--text" >Đăng bài</span>
                 </a>
             </li>
 

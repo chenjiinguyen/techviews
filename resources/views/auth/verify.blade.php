@@ -1,3 +1,5 @@
+<?php header("Set-Cookie: HttpOnly;Secure;SameSite=None"); //HTTP 1.1?>
+
 @extends('layouts.app', ['class' => 'bg-default'])
 @section('pageTitle', $pageTitle)
 @section('content')

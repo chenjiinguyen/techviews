@@ -11,6 +11,7 @@
         <link href="{{ asset('argon') }}/img/brand/favicon.png" rel="icon" type="image/png">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
         <link type="text/css" href="{{ asset('css/app.css') }}?v=1.0.0" rel="stylesheet">
+        @stack("head")
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -39,6 +40,6 @@
 
         <!-- Facebook -->
         <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=505957909860537&autoLogAppEvents=1"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId={{ env('FACEBOOK_KEY') }}&autoLogAppEvents=1"></script>
     </body>
 </html>

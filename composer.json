@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "graham-campbell/markdown": "^11.1",
         "guzzlehttp/guzzle": "~6.0",
         "laravel-frontend-presets/argon": "^1.0",
         "laravel/framework": "^6.2",
@@ -42,6 +43,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+         "files" : [
+             "app/helper.php"
         ]
     },
     "autoload-dev": {
