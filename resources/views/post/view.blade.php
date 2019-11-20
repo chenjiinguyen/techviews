@@ -5,6 +5,14 @@
 @section('author',$author)
 @section('userAction',$userAction)
 
+@push("js")
+<script type = "text/javascript" language = "javascript">
+    $(document).ready(function() {
+         $( ".card-body" ).find( "a" ).attr("target","_blank");
+    });
+</script>
+@endpush
+
 @section('content')
     <?php $action =json_decode($userAction,true) ?>
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 300px; background-image: url('https://c.wallhere.com/photos/b9/0d/trees_forest_Tatra_Mountains_Tatra_Slovakia_mist_pine_trees-1383935.jpg!d'); background-size: cover; background-position: center top;">
@@ -16,9 +24,8 @@
               <div class="col-lg-12 col-md-12 text-center">
                 <img src="{{ $author->avatar }}" width="128px" class="rounded-circle text-center">
                 <h3 class="display-3 text-white">{{ $author->name }}</h3>
-                <p class="text-white mt-0 mb-2"><b>Bài Viết: {{ $author->countPost }}| </b></p>
+                <div class="btn btn-sm btn-warning"><i class="fas fa-file-alt"></i> Bài Viết: {{ $author->countPost }}</div>
                 <a href="https://fb.com/{{ $author->real_id }}" target="_blank" class="btn btn-sm btn-info"><i class="fas fa-user"></i> Trang Cá Nhân</a>
-                @if (!empty($dataProtect->id_post)) <a href="https://fb.com/{{ $dataProtect->id_post }}"  target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-file-alt"></i> Bài Viết Gốc</a> @endif
               </div>
             </div>
           </div>
@@ -39,12 +46,28 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <p>
+                    <div class="card-body">                
                         {!! $dataProtect->text !!}
-                        </p>
                     </div>
                 </div>
+
+                @if (!empty($dataProtect->id_post))
+                <div class="card bg-secondary shadow mt-2">
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                            <h3 class="mb-0">Nội Dung Bài Viết Gốc</h3>
+                            </div>
+                            <div class="col-4 text-right">
+                                 <a href="https://fb.com/{{ $dataProtect->id_post }}"  target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-file-alt"></i> Bài Viết Gốc</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">            
+                        {!! $PostinGroup !!}
+                    </div>
+                </div>
+                @endif
             </div>
           <div class="col-xl-3 mb-5 mb-xl-0">
             <div class="card">
@@ -67,7 +90,7 @@
                 @if (!empty($dataProtect->reaction))
                 <div class="custom-control custom-checkbox mb-3">
                         <input class="custom-control-input" id="reaction" type="checkbox" disabled @if($action["reaction"]) checked @endif >
-                        <label class="custom-control-label" for="reaction">Khóa Tương Tác</label>
+                        <label class="custom-control-label" for="reaction">Khóa Like</label>
                 </div>
                 @endif
                 @if (!empty($dataProtect->comment))
@@ -94,6 +117,7 @@
         </div>
 
       </div>
+
 
 @endsection
 

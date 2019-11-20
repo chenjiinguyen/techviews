@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Post;
 use App\User;
+use App\Unlock;
 use Auth;
 use GrahamCampbell\Markdown\Facades\Markdown;
 
@@ -17,18 +18,43 @@ class PostController extends Controller
         $post = Post::where('hash', $hash)->first();
         $author = User::where('real_id', $post->id_author)->first();
         $author->countPost = Post::where('id_author', $post->id_author)->count();
-        $result = $this->checkPost($post, $mem);
-        // $action = json_decode(,true);
+        if(empty($post->id_post))
+        {
+            $new_id_post = check_post_exist($hash);
+            if($new_id_post["status"])
+            {
+                $post->id_post = $new_id_post["id"];
+                $post->save();
+            }
 
+        }
+        $result = $this->checkPost($post, $mem,$hash);
+        $post->unlock = Unlock::where('hash', $hash)->count();
+        $post->save();
+        
+        // $action = json_decode(,true);
+        
         return view('post.view')->with([
             'pageTitle' => $post->title,
             'dataProtect' => $result->data,
             'author' => $author,
             'userAction' => json_encode($result->action),
+            'PostinGroup' => Markdown::convertToHtml($this->PostinGroup($post->id_post)),
         ]);
     }
+    public function PostinGroup($id_post)
+    {
+        if(empty($id_post)) return "";
+        $result = json_decode(file_get_contents("https://graph.facebook.com/{$id_post}/?access_token=".env("TOKEN_FACEBOOK")),true);
+        if(!empty($result["id"]))
+        {
+            return $result["message"];
+        }
+            
+        
+    }
 
-    public function checkPost(Post $post,User $user)
+    public function checkPost(Post $post,User $user,$hash)
     {
         $text = $post->text;
         $data = (object)array();
@@ -39,44 +65,33 @@ class PostController extends Controller
         $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Vui Lòng Thực Hiện Hết Điều Kiện Mở Khỏa</div>';
         if(!empty($post->id_post))
         {
-            $client = new Client();
+            $unlock = Unlock::where("hash",$post->hash)->where("user",$user->real_id)->first();
+            if(!empty($unlock))
+                         goto unlock;
 
             // Check Member In Group
-            try {
-                $res = $client->get('https://graph.facebook.com/' . $user->real_id . "/groups?limit=10000&access_token=" . env("TOKEN_FACEBOOK"));
-            }
-            catch (GuzzleHttp\Exception\RequestException $e) {
-                return redirect(route('verify'));
-            }
-            if ($res->getStatusCode() == '200') {
-                $result = json_decode($res->getBody(), true);
-                if(array_search(env("GROUP_ID"), array_column($result["data"], 'id')) > -1)
+            $result_ingroup = json_decode(file_get_contents("https://graph.facebook.com/{$user->real_id}/groups?limit=10000&access_token=".env("TOKEN_FACEBOOK")),true);
+            if(!empty($result_ingroup["data"]))
+            {
+                if(array_search(env("GROUP_ID"), array_column($result_ingroup["data"], 'id')) > -1)
                     $data->action->member = true;
             }
+            
 
             // Check Reaction in Post
-            try {
-                $res = $client->get('https://graph.facebook.com/' . $post->id_post . "/likes?limit=10000&access_token=" . env("TOKEN_FACEBOOK"));
-            }
-            catch (GuzzleHttp\Exception\RequestException $e) {
-                return redirect(route('verify'));
-            }
-            if ($res->getStatusCode() == '200') {
-                $result = json_decode($res->getBody(), true);
-                if(array_search($user->real_id, array_column($result["data"], 'id')) > -1)
+            $result_likes = json_decode(file_get_contents("https://graph.facebook.com/{$post->id_post}/likes?limit=10000&access_token=" . env("TOKEN_FACEBOOK")),true);
+            if(!empty($result_ingroup["data"]))
+            {
+                if(array_search($user->real_id, array_column($result_likes["data"], 'id')) > -1)
                     $data->action->reaction = true;
             }
 
+
             // Check Comment in Post
-            try {
-                $res = $client->get('https://graph.facebook.com/' . $post->id_post . "/comments?limit=10000&access_token=" . env("TOKEN_FACEBOOK"));
-            }
-            catch (GuzzleHttp\Exception\RequestException $e) {
-                return redirect(route('verify'));
-            }
-            if ($res->getStatusCode() == '200') {
-                $result = json_decode($res->getBody(), true);
-                if(array_search($user->real_id, array_column(array_column($result["data"], 'from'),'id')) > -1)
+            $result_comments = json_decode(file_get_contents("https://graph.facebook.com/{$post->id_post}/comments?limit=10000&access_token=" . env("TOKEN_FACEBOOK")),true);
+            if(!empty($result_ingroup["data"]))
+            {
+                if(array_search($user->real_id, array_column(array_column($result_comments["data"], 'from'),'id')) > -1)
                     $data->action->comment = true;
             }
 
@@ -95,9 +110,22 @@ class PostController extends Controller
             if($post->comment && $data->action->comment)
                 $in_user["comment"] = 100;
 
+            unlock:
 
-            if(array_sum($in_post) == array_sum($in_user))
+            if(!empty($unlock) || array_sum($in_post) == array_sum($in_user))
+            {
+                $unlock = Unlock::where("hash",$post->hash)->where("user",$user->real_id)->first();
+                if(empty($unlock))
+                {
+                    Unlock::firstOrCreate(
+                        [    "hash" => $hash,
+                             "user" => $user->real_id,
+                         ]
+                    );
+                }
                 $data->data->text = Markdown::convertToHtml($text);
+            }
+                
 
         }
         else $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Bài Viết Chưa Được Đăng</div>';
