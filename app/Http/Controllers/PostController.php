@@ -29,8 +29,7 @@ class PostController extends Controller
 
         }
         $result = $this->checkPost($post, $mem,$hash);
-        $post->unlock = Unlock::where('hash', $hash)->count();
-        $post->save();
+        Post::where('hash', $hash)->update(['unlock' => Unlock::where('hash', $hash)->count()]);
         
         // $action = json_decode(,true);
         
@@ -65,9 +64,15 @@ class PostController extends Controller
         $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Vui Lòng Thực Hiện Hết Điều Kiện Mở Khỏa</div>';
         if(!empty($post->id_post))
         {
-            $unlock = Unlock::where("hash",$post->hash)->where("user",$user->real_id)->first();
+            $unlock = Unlock::where("hash",$hash)->where("user",$user->real_id)->first();
             if(!empty($unlock))
-                         goto unlock;
+            {
+                $data->action->member = true;
+                $data->action->reaction = true;
+                $data->action->comment = true;
+                goto unlock;
+            }
+                         
 
             // Check Member In Group
             $result_ingroup = json_decode(file_get_contents("https://graph.facebook.com/{$user->real_id}/groups?limit=10000&access_token=".env("TOKEN_FACEBOOK")),true);
@@ -114,7 +119,6 @@ class PostController extends Controller
 
             if(!empty($unlock) || array_sum($in_post) == array_sum($in_user))
             {
-                $unlock = Unlock::where("hash",$post->hash)->where("user",$user->real_id)->first();
                 if(empty($unlock))
                 {
                     Unlock::firstOrCreate(

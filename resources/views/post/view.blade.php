@@ -59,7 +59,7 @@
                             <h3 class="mb-0">Nội Dung Bài Viết Gốc</h3>
                             </div>
                             <div class="col-4 text-right">
-                                 <a href="https://fb.com/{{ $dataProtect->id_post }}"  target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-file-alt"></i> Bài Viết Gốc</a>
+                                 <a href="https://www.facebook.com/{{ $dataProtect->id_post }}"  target="_blank" class="btn btn-sm btn-warning"><i class="fas fa-file-alt"></i> Bài Viết Gốc</a>
                             </div>
                         </div>
                     </div>
