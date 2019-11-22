@@ -38,7 +38,7 @@ class PostController extends Controller
             'dataProtect' => $result->data,
             'author' => $author,
             'userAction' => json_encode($result->action),
-            'PostinGroup' => Markdown::convertToHtml($this->PostinGroup($post->id_post)),
+            'PostinGroup' => (!empty($post->id_post))?Markdown::convertToHtml($this->PostinGroup($post->id_post)):"",
         ]);
     }
     public function PostinGroup($id_post)

@@ -46,20 +46,22 @@ if (! function_exists('check_post_exist')) {
         $check_post["status"] = false;
         $hash_tag = "#".env("HASHTAG_FIND")."@".$hashtag."@";
         $post_hashtag = json_decode(file_get_contents("https://graph.facebook.com/".env("GROUP_ID")."/feed?fields=id,message&format=json&&limit=30&access_token=".env("TOKEN_FACEBOOK")),true);
-    
         $i = 0;
-        while ($post_hashtag["data"][$i] != null )
+        while (!empty($post_hashtag["data"][$i]))
         {
             $id_post1 = $post_hashtag["data"][$i]["id"];
-            $content1 = nl2br($post_hashtag["data"][$i]["message"]);
-            $content = addslashes($content1);
-            $ck = strpos($content, $hash_tag );
-            if ($ck != false)
+            if(!empty($post_hashtag["data"][$i]["message"]))
             {
-                $aaa = explode ( '_' , $id_post1);
-                $check_post["id"] = $aaa[1];
-                $check_post["status"] = true;
-                break;
+                $content1 = nl2br($post_hashtag["data"][$i]["message"]);
+                $content = addslashes($content1);
+                $ck = strpos($content, $hash_tag );
+                if ($ck != false)
+                {
+                    $aaa = explode ( '_' , $id_post1);
+                    $check_post["id"] = $aaa[1];
+                    $check_post["status"] = true;
+                    break;
+                }
             }
             $i++;
         }
