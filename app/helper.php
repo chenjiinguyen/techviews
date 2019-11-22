@@ -44,23 +44,25 @@ if (! function_exists('check_post_exist')) {
     function check_post_exist($hashtag)
     {
         $check_post["status"] = false;
-        $hash_tag = "#".env("HASHTAG_FIND")."@".$hashtag."@";
-        $post_hashtag = json_decode(file_get_contents("https://graph.facebook.com/".env("GROUP_ID")."/feed?fields=id,message&format=json&&limit=30&access_token=".env("TOKEN_FACEBOOK")),true);
+        $HASHTAG_FIND = env("HASHTAG_FIND");
+        $hash_tag = "/#$HASHTAG_FIND@([a-zA-Z0-9]\w+)@/";
+        $post_hashtag = json_decode(@file_get_contents("https://graph.facebook.com/".env("GROUP_ID")."/feed?fields=id,message&format=json&&limit=100&access_token=".env("TOKEN_FACEBOOK")),true);
         $i = 0;
         while (!empty($post_hashtag["data"][$i]))
         {
-            $id_post1 = $post_hashtag["data"][$i]["id"];
+            $id_post = $post_hashtag["data"][$i]["id"];
             if(!empty($post_hashtag["data"][$i]["message"]))
             {
-                $content1 = nl2br($post_hashtag["data"][$i]["message"]);
-                $content = addslashes($content1);
-                $ck = strpos($content, $hash_tag );
-                if ($ck != false)
+                preg_match_all ($hash_tag, $post_hashtag["data"][$i]["message"], $matches);
+                foreach($matches[1] as $node)
                 {
-                    $aaa = explode ( '_' , $id_post1);
-                    $check_post["id"] = $aaa[1];
+                  if($node == $hashtag)
+                  {
+                    $temp = explode ( '_' , $id_post);
+                    $check_post["id"] = $temp[1];
                     $check_post["status"] = true;
                     break;
+                  }
                 }
             }
             $i++;

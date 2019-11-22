@@ -26,8 +26,13 @@ class PostController extends Controller
                 $post->id_post = $new_id_post["id"];
                 $post->save();
             }
-
         }
+        if(empty(json_decode(@file_get_contents("https://graph.facebook.com/{$post->id_post}/?access_token=".env("TOKEN_FACEBOOK"),true))))
+        {
+            $post->id_post = NULL;
+            $post->save();
+        }
+        
         $result = $this->checkPost($post, $mem,$hash);
         Post::where('hash', $hash)->update(['unlock' => Unlock::where('hash', $hash)->count()]);
         
@@ -44,7 +49,8 @@ class PostController extends Controller
     public function PostinGroup($id_post)
     {
         if(empty($id_post)) return "";
-        $result = json_decode(file_get_contents("https://graph.facebook.com/{$id_post}/?access_token=".env("TOKEN_FACEBOOK")),true);
+        $result = json_decode(@file_get_contents("https://graph.facebook.com/{$id_post}/?access_token=".env("TOKEN_FACEBOOK")),true);
+        
         if(!empty($result["id"]))
         {
             return $result["message"];
@@ -64,6 +70,7 @@ class PostController extends Controller
         $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Vui Lòng Thực Hiện Hết Điều Kiện Mở Khỏa</div>';
         if(!empty($post->id_post))
         {
+            
             $unlock = Unlock::where("hash",$hash)->where("user",$user->real_id)->first();
             if(!empty($unlock))
             {
@@ -75,7 +82,7 @@ class PostController extends Controller
                          
 
             // Check Member In Group
-            $result_ingroup = json_decode(file_get_contents("https://graph.facebook.com/{$user->real_id}/groups?limit=10000&access_token=".env("TOKEN_FACEBOOK")),true);
+            $result_ingroup = json_decode(@file_get_contents("https://graph.facebook.com/{$user->real_id}/groups?limit=10000&access_token=".env("TOKEN_FACEBOOK")),true);
             if(!empty($result_ingroup["data"]))
             {
                 if(array_search(env("GROUP_ID"), array_column($result_ingroup["data"], 'id')) > -1)
@@ -84,7 +91,7 @@ class PostController extends Controller
             
 
             // Check Reaction in Post
-            $result_likes = json_decode(file_get_contents("https://graph.facebook.com/{$post->id_post}/likes?limit=10000&access_token=" . env("TOKEN_FACEBOOK")),true);
+            $result_likes = json_decode(@file_get_contents("https://graph.facebook.com/{$post->id_post}/likes?limit=10000&access_token=" . env("TOKEN_FACEBOOK")),true);
             if(!empty($result_ingroup["data"]))
             {
                 if(array_search($user->real_id, array_column($result_likes["data"], 'id')) > -1)
@@ -93,7 +100,7 @@ class PostController extends Controller
 
 
             // Check Comment in Post
-            $result_comments = json_decode(file_get_contents("https://graph.facebook.com/{$post->id_post}/comments?limit=10000&access_token=" . env("TOKEN_FACEBOOK")),true);
+            $result_comments = json_decode(@file_get_contents("https://graph.facebook.com/{$post->id_post}/comments?limit=10000&access_token=" . env("TOKEN_FACEBOOK")),true);
             if(!empty($result_ingroup["data"]))
             {
                 if(array_search($user->real_id, array_column(array_column($result_comments["data"], 'from'),'id')) > -1)
