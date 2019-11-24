@@ -106,9 +106,9 @@
                 </div>
                 @endif
                 @if (!empty($dataProtect->password))
-                <div class="form-group">
+                <form class="form-group">
                         <input type="text" placeholder="Nhập mật khẩu..."  class="form-control" >
-                </div>
+                </form>
                 @endif
             </div>
             </div>

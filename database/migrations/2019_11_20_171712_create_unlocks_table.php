@@ -15,7 +15,7 @@ class CreateUnlocksTable extends Migration
     {
         Schema::create('unlocks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('hash',10);
+            $table->char('hash_id',10);
             $table->char('user',20);
             $table->timestamps();
         });

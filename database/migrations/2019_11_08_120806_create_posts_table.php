@@ -14,7 +14,7 @@ class CreatePostsTable extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->char('hash',10);
+            $table->char('id',10);
             $table->string('title')->nullable();
             $table->string('id_author')->nullable();
             $table->string('id_post')->nullable();
@@ -27,7 +27,7 @@ class CreatePostsTable extends Migration
             $table->text('text')->nullable();
             $table->bigInteger('views')->default(0);
             $table->bigInteger('unlock')->default(0);
-            $table->primary('hash');
+            $table->primary('id');
         });
     }
 

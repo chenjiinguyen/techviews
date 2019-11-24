@@ -15,7 +15,7 @@ class PostController extends Controller
 
     public function index($hash) {
         $mem = Auth::user();
-        $post = Post::where('hash', $hash)->first();
+        $post = Post::where('id', $hash)->first();
         $author = User::where('real_id', $post->id_author)->first();
         $author->countPost = Post::where('id_author', $post->id_author)->count();
         if(empty($post->id_post))
@@ -33,8 +33,10 @@ class PostController extends Controller
             $post->save();
         }
         
-        $result = $this->checkPost($post, $mem,$hash);
-        Post::where('hash', $hash)->update(['unlock' => Unlock::where('hash', $hash)->count()]);
+        $result = $this->checkPost($post, $mem);
+        
+        Post::where('id', $hash)->update(['unlock' => Unlock::where('hash_id', $hash)->count()]);
+        $post = Post::where('id', $hash)->first();
         
         // $action = json_decode(,true);
         
@@ -59,7 +61,7 @@ class PostController extends Controller
         
     }
 
-    public function checkPost(Post $post,User $user,$hash)
+    public function checkPost(Post $post,User $user)
     {
         $text = $post->text;
         $data = (object)array();
@@ -71,7 +73,7 @@ class PostController extends Controller
         if(!empty($post->id_post))
         {
             
-            $unlock = Unlock::where("hash",$hash)->where("user",$user->real_id)->first();
+            $unlock = Unlock::where("hash_id",$post->id)->where("user",$user->real_id)->first();
             if(!empty($unlock))
             {
                 $data->action->member = true;
@@ -128,11 +130,7 @@ class PostController extends Controller
             {
                 if(empty($unlock))
                 {
-                    Unlock::firstOrCreate(
-                        [    "hash" => $hash,
-                             "user" => $user->real_id,
-                         ]
-                    );
+                  Unlock::firstOrCreate(array('hash_id' =>  $post->id,'user' => $user->real_id));
                 }
                 $data->data->text = Markdown::convertToHtml($text);
             }

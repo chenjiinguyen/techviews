@@ -26,10 +26,10 @@ class CreatePostController extends Controller
             $reaction = $request->input("reaction");
             $comment = $request->input("comment");
             $hash = getHash(7);
-            while(Post::where("hash",$hash)->first() != NULL)
+            while(Post::where("id",$hash)->first() != NULL)
                 $hash = getHash(7);
             $post =  Post::firstOrCreate(
-                    [    "hash" => $hash ],
+                    [    "id" => $hash ],
                     [
                         "title" => $title,
                         "id_author" => Auth::user()->real_id,
