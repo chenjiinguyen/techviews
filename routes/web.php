@@ -26,11 +26,13 @@ Route::get('{provider}/callback', 'AuthController@handleProviderCallback');
 Route::middleware('auth', 'verify.id')->group(function() {
 	Route::resource('user', 'UserController')->except('show');
 
-	Route::prefix('profile', function() {
-		Route::get('', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-		Route::put('', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-		Route::put('password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-	});
+	Route::get('/profile', 'ProfileController@index')->name('profile');
+
+	// Route::prefix('profile', function() {
+	// 	Route::get('', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+	// 	Route::put('', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+	// 	Route::put('password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	// });
 
     Route::get('post/new', 'Post\CreatePostController@index')->name('create.post');
     Route::post('post/new', 'Post\CreatePostController@create');

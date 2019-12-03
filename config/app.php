@@ -55,7 +55,8 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-
+    'token' => env('TOKEN_FACEBOOK',''),
+    'group_id' => env('GROUP_ID','254199531951879'),
     'asset_url' => env('ASSET_URL', null),
 
     /*

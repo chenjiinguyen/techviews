@@ -12,7 +12,7 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
        DB::table('posts')->insert([
-           'hash' => 'abc',
+           'id' => 'abc',
            'title' => 'Title Test',
            'id_author' => '100006847333620',
            'created_at' => now(),
@@ -23,7 +23,7 @@ class PostsTableSeeder extends Seeder
            'text' => 'Nội dung ẩn',
        ]);
        DB::table('posts')->insert([
-            'hash' => 'y9RcPLz',
+            'id' => 'y9RcPLz',
             'title' => 'Khóa Học Facebook Marketing 2019 - Tiếp Cận Target Nâng Cao',
             'id_author' => '100002753472309',
             'id_post' => '381861819185649',

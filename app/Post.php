@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $table = 'posts';
-    public $primaryKey = 'hash';
+    public $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'hash', 'title', 'id_author','in_group','reaction','comment','password', 'text',
+        'id', 'title', 'id_author','in_group','reaction','comment','password', 'text',
     ];
 
     /**
@@ -24,6 +24,12 @@ class Post extends Model
      */
     protected $casts = [
         'id_post','views','unlock',
+        'id' => 'string'
     ];
+
+    public function user()
+    {
+        $this->belongsTo('App\User', 'real_id', 'id_author');
+    }
 
 }
