@@ -46,7 +46,7 @@ if (! function_exists('check_post_exist')) {
         $check_post["status"] = false;
         $HASHTAG_FIND = env("HASHTAG_FIND");
         $hash_tag = "/#$HASHTAG_FIND@([a-zA-Z0-9]\w+)@/";
-        $post_hashtag = json_decode(@file_get_contents("https://graph.facebook.com/".env("GROUP_ID")."/feed?fields=id,message&format=json&&limit=100&access_token=".env("TOKEN_FACEBOOK")),true);
+        $post_hashtag = json_decode(@file_get_contents("https://graph.facebook.com/".env("GROUP_ID")."/feed?fields=id,message&format=json&&limit=100&access_token=".config('app.token')),true);
         $i = 0;
         while (!empty($post_hashtag["data"][$i]))
         {

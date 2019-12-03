@@ -27,4 +27,9 @@ class Post extends Model
         'id' => 'string'
     ];
 
+    public function user()
+    {
+        $this->belongsTo('App\User', 'real_id', 'id_author');
+    }
+
 }

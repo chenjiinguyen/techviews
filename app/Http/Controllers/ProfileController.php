@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
-use App\Http\Requests\PasswordRequest;
-use Illuminate\Support\Facades\Hash;
+use App\User;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -13,9 +12,16 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit()
+    public function index()
     {
-        return view('profile.edit');
+        $user = User::find(auth()->user()->id)->post();
+
+        $posts = $user->paginate(3);
+        Carbon::setLocale('vi');
+
+        $totalPost = $user->count();
+
+        return view('users.profile', compact('posts', 'totalPost'));
     }
 
     /**
