@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\User;
 use Auth;
-
+ini_set('display_errors', 'On');
 class VerifyController extends Controller
 {
     /**
@@ -42,16 +42,10 @@ class VerifyController extends Controller
         {
             $url = $request->input("url");
             $idpostverymember = explode("?fb_comment_id=", $url);
-            $client = new Client();
+            $result = json_decode(@file_get_contents("https://graph.facebook.com/" . $idpostverymember[1] . "?access_token=" . config("app.token_facebook")),true);
+            if(!empty($result))
+            {
 
-            try {
-                $res = $client->get('https://graph.facebook.com/' . $idpostverymember[1] . "?access_token=" . config("app.token_facebook"));
-            }
-            catch (GuzzleHttp\Exception\RequestException $e) {
-                return redirect(route('verify'));
-            }
-            if ($res->getStatusCode() == '200') {
-                $result = json_decode($res->getBody(), true);
                 if (auth()->user()->provider_id === $result['message']) {
                     User::where('provider_id', $result['message'])->update(['real_id' => $result['from']['id'], 'avatar' => "https://graph.facebook.com/".$result["from"]["id"]."/picture?width=1920" ]);
                     return redirect(route('home'));

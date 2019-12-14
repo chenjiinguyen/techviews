@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'token_facebook' => env('TOKEN_FACEBOOK', ''),
+    'token_facebook' => env('TOKEN_FACEBOOK', 'EAAAAZAw4FxQIBAN8tl3okCMHZBdMypCljkIwseEwuec8eOe9LX02jK3MJXr4HSK7ZC7BfxZC5ctVhVlZBZBUneKtLhmtxy4QRkuZBiPmekv23QkiLiZAGCz8yX9sLRZAULsBDiBhU7fuRZAwuNEJI7pssFL8B4KQxZCxoIJBKIyAq7quwZDZD'),
 
     /*
     |--------------------------------------------------------------------------

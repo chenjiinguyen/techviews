@@ -27,19 +27,19 @@ class PostController extends Controller
                 $post->save();
             }
         }
-        // if(empty(json_decode(@file_get_contents("https://graph.facebook.com/{$post->id_post}/?access_token=".config('app.token'),true))))
-        // {
-        //     $post->id_post = NULL;
-        //     $post->save();
-        // }
-        
+        if(empty(json_decode(@file_get_contents("https://graph.facebook.com/{$post->id_post}/?access_token=".config('app.token'),true))))
+        {
+            $post->id_post = NULL;
+            $post->save();
+        }
+
         $result = $this->checkPost($post, $mem);
-        
+
         Post::where('id', $hash)->update(['unlock' => Unlock::where('hash_id', $hash)->count()]);
         $post = Post::where('id', $hash)->first();
-        
+
         // $action = json_decode(,true);
-        
+
         return view('post.view')->with([
             'pageTitle' => $post->title,
             'dataProtect' => $result->data,
@@ -56,8 +56,8 @@ class PostController extends Controller
         {
             return $result["message"];
         }
-            
-        
+
+
     }
 
     public function checkPost(Post $post,User $user)
@@ -71,7 +71,7 @@ class PostController extends Controller
         $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Vui Lòng Thực Hiện Hết Điều Kiện Mở Khỏa</div>';
         if(!empty($post->id_post))
         {
-            
+
             $unlock = Unlock::where("hash_id",$post->id)->where("user",$user->real_id)->first();
             if(!empty($unlock))
             {
@@ -80,7 +80,7 @@ class PostController extends Controller
                 $data->action->comment = true;
                 goto unlock;
             }
-                         
+
 
             // Check Member In Group
             $result_ingroup = json_decode(@file_get_contents("https://graph.facebook.com/{$user->real_id}/groups?limit=10000&access_token=".config('app.token')),true);
@@ -89,7 +89,7 @@ class PostController extends Controller
                 if(array_search(config('app.group_id'), array_column($result_ingroup["data"], 'id')) > -1)
                     $data->action->member = true;
             }
-            
+
 
             // Check Reaction in Post
             $result_likes = json_decode(@file_get_contents("https://graph.facebook.com/{$post->id_post}/likes?limit=10000&access_token=" . config('app.token')),true);
@@ -133,7 +133,7 @@ class PostController extends Controller
                 }
                 $data->data->text = Markdown::convertToHtml($text);
             }
-                
+
 
         }
         else $data->data->text = '<div class="alert alert-danger text-white" role="alert"><strong>Chưa Mở Khóa!</strong> Bài Viết Chưa Được Đăng</div>';
