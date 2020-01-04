@@ -58,7 +58,7 @@
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <script>
-        $("#search").click(function () {
+            function search() {
             let keyword = $("#search_input").val();
             if(keyword.length > 0){
                 $.ajax({
@@ -99,6 +99,9 @@
 
                 });
             };
-        });
+        };
+        $("#search").click(search());
+
+        $('#search_input').onEnterKey(search());
     </script>
 @endpush
