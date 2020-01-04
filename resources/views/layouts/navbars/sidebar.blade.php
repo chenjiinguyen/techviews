@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/search">
                         <i class="fa fa-search text-blue"></i> {{ __('Tìm kiếm') }}
                     </a>
                 </li>
@@ -94,7 +94,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-blue" href="#">
                                     <span class="nav-link-text">
-                                        <i class="fas fa-hashtag"></i> 
+                                        <i class="fas fa-hashtag"></i>
                                         {{ __('techviews_share') }}
                                     </span>
                                 </a>
@@ -102,7 +102,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-blue" href="#">
                                     <span class="nav-link-text">
-                                        <i class="fas fa-hashtag"></i> 
+                                        <i class="fas fa-hashtag"></i>
                                         {{ __('techviews_relax') }}
                                     </span>
                                 </a>
